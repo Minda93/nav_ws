@@ -1,0 +1,19 @@
+.vscode/
+.catkin_workspace
+__pycache__/
+*.zip
+*.png
+
+# ros1
+#build/
+#devel/
+
+# ros2
+build/
+install/
+log/
+core/
+#aws_gazebo/
+aws-robomaker-bookstore-world
+robot_description
+

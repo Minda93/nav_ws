@@ -12,8 +12,8 @@ __pycache__/
 build/
 install/
 log/
-core/
+core
 #aws_gazebo/
 aws-robomaker-bookstore-world
-robot_description
+rosbot_description
 

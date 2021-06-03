@@ -74,10 +74,20 @@
     ```bash
       # error
       # gzclient boost error
-      # gazebo pkgs not found
 
       # solution
       # source gazebo env
+    ```
+  * 3. aws_robomaker_retail_Spotlight_01 model mesh not found
+    ```bash 
+      # path error
+      aws_robomaker_retail_Spotlight_01/meshes/aws_Spotlight_01_collision.DAE
+      aws_robomaker_retail_Spotlight_01/meshes/aws_Spotlight_01_visual.DAE
+      
+      # solution
+      # change file name
+      aws_spotlight_01_collision.DAE -> aws_Spotlight_01_collision.DAE
+      aws_spotlight_01_visual.DAE-> aws_Spotlight_01_visual.DAE
     ```
 
 # Reference

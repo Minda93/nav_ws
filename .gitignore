@@ -16,4 +16,5 @@ core
 #aws_gazebo/
 aws-robomaker-bookstore-world
 rosbot_description
+navigation2
 

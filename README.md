@@ -15,7 +15,7 @@ ros2 practice 3
 
 | names                         | version           |
 | ---                           | ---               |
-| compiler                      | 10.0.0-4ubuntu1   |
+| clang                         | 10.0.0-4ubuntu1   |
 | CMake                         | 3.18.4            |
 | ros2                          | galactic          |
 | gazebo                        | 11.5.1            |

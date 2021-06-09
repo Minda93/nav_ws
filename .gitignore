@@ -13,8 +13,12 @@ build/
 install/
 log/
 core
-#aws_gazebo/
+
 aws-robomaker-bookstore-world
 rosbot_description
-navigation2
 
+navigation2
+ros
+ompl
+slam_toolbox
+BehaviorTree

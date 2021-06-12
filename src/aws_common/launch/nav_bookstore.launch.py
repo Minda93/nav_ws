@@ -8,30 +8,43 @@ from launch.actions import IncludeLaunchDescription
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
+
 from launch_ros.actions import Node
+from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
+  # launch parameter  
+  use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+  pkgsPath = FindPackageShare([
+      "aws_robomaker_bookstore_world",
+      "aws_common",
+      "gazebo_ros",
+      "rosbot_description",])
+  gazebo_ros = pkgsPath.find("gazebo_ros")
+  aws_common = pkgsPath.find("aws_common")
+
+  # world
   world_file_name =  'bookstore.world'
   world = os.path.join(
-    get_package_share_directory(
-      'aws_robomaker_bookstore_world'), 'worlds', world_file_name)
+    pkgsPath.find("aws_robomaker_bookstore_world"), 'worlds', world_file_name)
 
-  # define gazebo
-  use_sim_time = launch.substitutions.LaunchConfiguration(
-    'use_sim_time', default='true')
-
-  # define pkg path
-  gazebo_ros = get_package_share_directory('gazebo_ros')
-  rosbot_description = get_package_share_directory('rosbot_description')
-
-  # robot urdf
-  urdf_file_name = 'urdf/rosbot.urdf'
-  urdf = os.path.join(
-    get_package_share_directory('rosbot_description'),
-    urdf_file_name)
-  with open(urdf, 'r') as infp:
-    robot_desc = infp.read()
+  # spawn robot (insert model to gazebo)
+  spawn_robot = Node(
+    package='gazebo_ros',
+    executable='spawn_entity.py',
+    name="spawn_entity",
+    arguments=[
+      '-spawn_service_timeout', '60',
+      '-entity', 'rosbot', 
+      '-x', '0', 
+      '-y', '0', 
+      '-z', '0.03', 
+      '-file', pkgsPath.find("rosbot_description") + '/models/rosbot.sdf'],
+    parameters=[
+        {"use_sim_time", use_sim_time},],
+    output='screen',
+  )
 
   # gazebo
   gazebo_client = launch.actions.IncludeLaunchDescription(
@@ -45,23 +58,24 @@ def generate_launch_description():
       os.path.join(gazebo_ros, 'launch', 'gzserver.launch.py'))
   )
 
-  spawn_rosbot = launch.actions.IncludeLaunchDescription(
+  rosbot_tf = launch.actions.IncludeLaunchDescription(
     launch.launch_description_sources.PythonLaunchDescriptionSource(
-      os.path.join(rosbot_description, 'launch', 'rosbot_spawn.launch.py'))
+      os.path.join(aws_common, 'launch', 'robot_tf.launch.py')),
+    launch_arguments={'use_sim_time': use_sim_time, 'use_map_2_odom' : 'true'}.items(),
   )
-  
+
   return LaunchDescription([
     DeclareLaunchArgument(
       'world',
       default_value=[world, ''],
       description='SDF world file'),
     DeclareLaunchArgument(
-        name='gui',
-        default_value='true'
+      name='gui',
+      default_value='true'
     ),
     DeclareLaunchArgument(
-        name='use_sim_time',
-        default_value='true'
+      name='use_sim_time',
+      default_value= "true"
     ),
     DeclareLaunchArgument('verbose', default_value='true',
       description='Set "true" to increase messages written to terminal.'),
@@ -71,7 +85,8 @@ def generate_launch_description():
       description='Set "false" not to load "libgazebo_ros_state.so"'),
     gazebo_server,
     gazebo_client,
-    spawn_rosbot,
+    spawn_robot,
+    rosbot_tf,
   ])
 
 if __name__ == '__main__':

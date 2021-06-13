@@ -48,15 +48,15 @@ else:
     import termios
     import tty
 
-BURGER_MAX_LIN_VEL = 0.22
-BURGER_MAX_ANG_VEL = 1.82
+ROBOT_MAX_LIN_VEL = 0.22
+ROBOT_MAX_ANG_VEL = 1.82
 
 LIN_VEL_STEP_SIZE = 0.01
 ANG_VEL_STEP_SIZE = 0.1
 
 
 msg = """
-Control Your TurtleBot3!
+Control Your Robot!
 ---------------------------
 Moving around:
         w
@@ -119,11 +119,11 @@ def constrain(input_vel, low_bound, high_bound):
 
 
 def check_linear_limit_velocity(velocity):
-    return constrain(velocity, -BURGER_MAX_LIN_VEL, BURGER_MAX_LIN_VEL)
+    return constrain(velocity, -ROBOT_MAX_LIN_VEL, ROBOT_MAX_LIN_VEL)
 
 
 def check_angular_limit_velocity(velocity):
-    return constrain(velocity, -BURGER_MAX_ANG_VEL, BURGER_MAX_ANG_VEL)
+    return constrain(velocity, -ROBOT_MAX_ANG_VEL, ROBOT_MAX_ANG_VEL)
 
 
 def main():

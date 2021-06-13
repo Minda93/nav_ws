@@ -71,6 +71,15 @@ ros2 practice 3
     # default frames.gv and frames.pdf
     $ ros2 run tf2_tools view_frames
   ```
+* check urdf format
+  ```bash
+    $ check_urdf <path_of_urdf_file>
+
+    # success output
+    # robot name
+    # ---------- Successfully Parsed XML ---------------
+    # robot link
+  ```
     
 # Bug 
 ## 1. clang compiler : (-Wall -Wextra -Wpedantic)
@@ -105,18 +114,18 @@ ros2 practice 3
     
 ## 2. robot_state_publisher is incorrectly working
 * output `/tf` is not correct.
+  * robot model and tf is not stable.
   * reason
-    * urdf error.
-    * tf_tree's connection is incorrect.
+    * tf_tree connection is incorrect.
   * solution
     * Temporarily use custom tf tree -> `robot_tf.launch.py`
-      * There is not robot model in rviz.
+      * But, there is not robot model in rviz.
+    * custom odom transform
 
 # TODO
 1. set rviz file and launch rviz
 2. test `slam_toolbox` parameters
-2. test `nav2`
-
+3. test `nav2`
 
 # Reference 
 * slam_toolbox
@@ -129,5 +138,8 @@ ros2 practice 3
   * [turtlebot3 github](https://github.com/ROBOTIS-GIT/turtlebot3)
 * gazebo
   * [How to Simulate a Robot Using Gazebo and ROS 2](https://automaticaddison.com/how-to-simulate-a-robot-using-gazebo-and-ros-2/)
+  * [ROS講座40 車輪ロボットを作る4(gazeboの位置をrvizに取り出す)](https://qiita.com/srs/items/5848c6b05e5f8a0827f9)
+* rviz
+  * [ROS2:簡単な箱の表示 rviz ](https://memodays.jp/400/)
   * [Using URDF with robot_state_publisher](https://docs.ros.org/en/galactic/Tutorials/URDF/Using-URDF-with-Robot-State-Publisher.html)
   * [robot_state_publisher + xacro + Python launch](https://answers.ros.org/question/361623/ros2-robot_state_publisher-xacro-python-launch/)

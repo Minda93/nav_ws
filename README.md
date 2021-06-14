@@ -11,6 +11,7 @@
 - [Bug](#bug)
   - [1. clang compiler : (-Wall -Wextra -Wpedantic)](#1-clang-compiler---wall--wextra--wpedantic)
   - [2. robot_state_publisher is incorrectly working](#2-robot_state_publisher-is-incorrectly-working)
+  - [3. Some plugins of gazebo_ros_pkgs is not support for ros2](#3-some-plugins-of-gazebo_ros_pkgs-is-not-support-for-ros2)
 - [TODO](#todo)
 - [Reference](#reference)
 
@@ -116,21 +117,38 @@ ros2 practice 3
 * output `/tf` is not correct.
   * robot model and tf is not stable.
   * reason
+    * Different from `sdf model` and `xcaro model`
     * tf_tree connection is incorrect.
   * solution
     * Temporarily use custom tf tree -> `robot_tf.launch.py`
       * But, there is not robot model in rviz.
-    * custom odom transform
+    * ~~custom odom transform~~
+
+## 3. Some plugins of gazebo_ros_pkgs is not support for ros2
+* xcaro model is too old version to use.
+  * reason
+    * plugins too old
+      * gazebo_ros_skid_steer_drive
+      * gazebo_ros_openni_kinect
+      * gazebo_ros_laser
+      * gazebo_ros_range
+  * solution
+    * use sdf model to build xcaro model and urdf model 
+      * gazebo_ros_skid_steer_drive -> gazebo_ros_diff_drive
+      * gazebo_ros_openni_kinect -> gazebo_ros_depth_camera
+      * gazebo_ros_laser -> gazebo_ray_sensor
+      * gazebo_ros_range -> gazebo_ray_sensor
 
 # TODO
-1. set rviz file and launch rviz
-2. test `slam_toolbox` parameters
-3. test `nav2`
+* [ ] 1. fix xcaro model bug
+* [ ] 2. set rviz file and launch rviz
+* [ ] 3. test `slam_toolbox` parameters
+* [ ] 4. test `nav2`
 
 # Reference 
 * slam_toolbox
   * [slam_toolbox github](https://github.com/SteveMacenski/slam_toolbox)
-  * [ROS2 Navigation2 ~slam-toolboxでSLAMする~](https://qiita.com/porizou1/items/152ad3829e84a9ba0355)
+  * [ROS2 Navigation2 \~slam-toolboxでSLAMする\~](https://qiita.com/porizou1/items/152ad3829e84a9ba0355)
 * navigation2
   * [nav2 index](https://navigation.ros.org/index.html)
   * [navigation2](https://github.com/ros-planning/navigation2)
@@ -139,7 +157,10 @@ ros2 practice 3
 * gazebo
   * [How to Simulate a Robot Using Gazebo and ROS 2](https://automaticaddison.com/how-to-simulate-a-robot-using-gazebo-and-ros-2/)
   * [ROS講座40 車輪ロボットを作る4(gazeboの位置をrvizに取り出す)](https://qiita.com/srs/items/5848c6b05e5f8a0827f9)
+  * [ROS 2 Migration: Spawn and delete](https://github.com/ros-simulation/gazebo_ros_pkgs/wiki/ROS-2-Migration:-Spawn-and-delete)
 * rviz
   * [ROS2:簡単な箱の表示 rviz ](https://memodays.jp/400/)
   * [Using URDF with robot_state_publisher](https://docs.ros.org/en/galactic/Tutorials/URDF/Using-URDF-with-Robot-State-Publisher.html)
   * [robot_state_publisher + xacro + Python launch](https://answers.ros.org/question/361623/ros2-robot_state_publisher-xacro-python-launch/)
+* issue
+  * [gazebo_ros_pkgs #512](https://github.com/ros-simulation/gazebo_ros_pkgs/issues/512)

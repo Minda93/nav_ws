@@ -35,7 +35,11 @@
     # $ rosdep update
     # $ rosdep install -i -r -y --from-paths .
 
-    $ colcon build --symlink-install --packages-select aws-robomaker-bookstore-world rosbot_description 
+    $ colcon build --symlink-install --packages-select aws-robomaker-bookstore-world rosbot_description
+
+    # copy rosbot2 model
+    $ cd <ws>/aws_gazebo/rosbot_urdf
+    $ cp * <ws>/aws_gazebo/rosbot_description/urdf
   ```
 
 # 3. Test Model on gazebo

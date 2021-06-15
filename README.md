@@ -117,7 +117,7 @@ ros2 practice 3
 * output `/tf` is not correct.
   * robot model and tf is not stable.
   * reason
-    * Different from `sdf model` and `xcaro model`
+    * Different from `sdf model` and `xacro model`
     * tf_tree connection is incorrect.
   * solution
     * Temporarily use custom tf tree -> `robot_tf.launch.py`
@@ -125,7 +125,7 @@ ros2 practice 3
     * ~~custom odom transform~~
 
 ## 3. Some plugins of gazebo_ros_pkgs is not support for ros2
-* xcaro model is too old version to use.
+* xacro model is too old version to use.
   * reason
     * plugins too old
       * gazebo_ros_skid_steer_drive
@@ -133,15 +133,21 @@ ros2 practice 3
       * gazebo_ros_laser
       * gazebo_ros_range
   * solution
-    * use sdf model to build xcaro model and urdf model 
-      * gazebo_ros_skid_steer_drive -> gazebo_ros_diff_drive
-      * gazebo_ros_openni_kinect -> gazebo_ros_depth_camera
-      * gazebo_ros_laser -> gazebo_ray_sensor
-      * gazebo_ros_range -> gazebo_ray_sensor
+    * use sdf model to build xacro model (rosbot2.xacro)
+      * change tf tree
+      * change plugin 
+        * gazebo_ros_skid_steer_drive -> gazebo_ros_diff_drive
+        * gazebo_ros_openni_kinect -> gazebo_ros_depth_camera
+        * gazebo_ros_laser -> gazebo_ray_sensor
+        * gazebo_ros_range -> gazebo_ray_sensor
 
 # TODO
-* [ ] 1. fix xcaro model bug
-* [ ] 2. set rviz file and launch rviz
+* [x] 1. fix xacro model bug
+  * [x] rviz
+  * [ ] gazebo -> plugin cannot use and be not found mesh file
+* [x] 2. set rviz file and launch rviz
+  * [x] rviz file
+  * [ ] launch
 * [ ] 3. test `slam_toolbox` parameters
 * [ ] 4. test `nav2`
 

@@ -47,7 +47,7 @@ def generate_launch_description():
     package='tf2_ros',
     executable='static_transform_publisher',
     name="tf_base_link_2_laser",
-    arguments=['0', '0', '0.07', '0', '0', '0', 'base_link', 'laser'],
+    arguments=['0.02', '0', '0.058', '0', '0', '0', 'base_link', 'laser'],
     parameters=[
        {"use_sim_time", use_sim_time},],
     output='screen',
@@ -63,11 +63,11 @@ def generate_launch_description():
     output='screen',
   )
 
-  base_link_2_camera_rgb_frame = Node(
+  camera_link_2_camera_rgb_frame = Node(
     package='tf2_ros',
     executable='static_transform_publisher',
-    name="tf_base_link_2_camera_rgb_frame",
-    arguments=['0.2', '0', '0.8', '0', '0', '0', 'base_link', 'camera_rgb_frame'],
+    name="tf_camera_link_2_camera_rgb_frame",
+    arguments=['0', '0', '0', '-1.5707', '0', '-1.5707', 'camera_link', 'camera_rgb_frame'],
     parameters=[
        {"use_sim_time", use_sim_time},],
     output='screen',
@@ -83,57 +83,7 @@ def generate_launch_description():
     output='screen',
   )
 
-  # robot related
-  base_link_2_dummy = Node(
-    package='tf2_ros',
-    executable='static_transform_publisher',
-    name="tf_base_link_2_dummy",
-    arguments=['0', '0', '0', '0', '0', '0', 'base_link', 'dummy'],
-    parameters=[
-        {"use_sim_time", use_sim_time},],
-    output='screen',
-  )
-
-  base_link_2_range_fl = Node(
-    package='tf2_ros',
-    executable='static_transform_publisher',
-    name="tf_base_link_2_range_fl",
-    arguments=['0', '0', '0', '0', '0', '0', 'base_link', 'range_fl'],
-    parameters=[
-      {"use_sim_time", use_sim_time},],
-    output='screen',
-  )
-
-  base_link_2_range_fr = Node(
-    package='tf2_ros',
-    executable='static_transform_publisher',
-    name="tf_base_link_2_range_fr",
-    arguments=['0', '0', '0', '0', '0', '0', 'base_link', 'range_fr'],
-    parameters=[
-        {"use_sim_time", use_sim_time},],
-    output='screen',
-  )
-
-  base_link_2_range_rl = Node(
-    package='tf2_ros',
-    executable='static_transform_publisher',
-    name="tf_base_link_2_range_rl",
-    arguments=['0', '0', '0', '0', '0', '0', 'base_link', 'range_rl'],
-    parameters=[
-       {"use_sim_time", use_sim_time},],
-    output='screen',
-  )
-
-  base_link_2_range_rr = Node(
-    package='tf2_ros',
-    executable='static_transform_publisher',
-    name="tf_base_link_2_range_rr",
-    arguments=['0', '0', '0', '0', '0', '0', 'base_link', 'range_rr'],
-    parameters=[
-        {"use_sim_time", use_sim_time},],
-    output='screen',
-  )
-
+  # imu
   base_link_2_top = Node(
     package='tf2_ros',
     executable='static_transform_publisher',
@@ -144,21 +94,53 @@ def generate_launch_description():
     output='screen',
   )
 
-  base_link_2_dummy = Node(
+  # range sensor
+  base_link_2_range_fl = Node(
     package='tf2_ros',
     executable='static_transform_publisher',
-    name="tf_base_link_2_dummy",
-    arguments=['0', '0', '0', '0', '0', '0', 'base_link', 'dummy'],
+    name="tf_base_link_2_range_fl",
+    arguments=['0.1', '0.05', '0.01', '0', '0', '0.13', 'base_link', 'range_fl'],
+    parameters=[
+      {"use_sim_time", use_sim_time},],
+    output='screen',
+  )
+
+  base_link_2_range_fr = Node(
+    package='tf2_ros',
+    executable='static_transform_publisher',
+    name="tf_base_link_2_range_fr",
+    arguments=['0.1', '-0.05', '0.01', '0', '0', '-0.13', 'base_link', 'range_fr'],
     parameters=[
         {"use_sim_time", use_sim_time},],
     output='screen',
   )
 
+  base_link_2_range_rl = Node(
+    package='tf2_ros',
+    executable='static_transform_publisher',
+    name="tf_base_link_2_range_rl",
+    arguments=['-0.1', '0.05', '0.01', '0', '0', '2.01', 'base_link', 'range_rl'],
+    parameters=[
+       {"use_sim_time", use_sim_time},],
+    output='screen',
+  )
+
+  base_link_2_range_rr = Node(
+    package='tf2_ros',
+    executable='static_transform_publisher',
+    name="tf_base_link_2_range_rr",
+    arguments=['-0.1', '-0.05', '0.01', '0', '0', '3.27', 'base_link', 'range_rr'],
+    parameters=[
+        {"use_sim_time", use_sim_time},],
+    output='screen',
+  )
+
+  # robot related
   base_link_2_front_left_wheel = Node(
     package='tf2_ros',
     executable='static_transform_publisher',
     name="tf_base_link_2_front_left_wheel",
-    arguments=['0.08', '0.1', '0', '0', '0', '0', 'base_link', 'front_left_wheel'],
+    arguments=['0.05', '0.11', '0', '0', '0', '0', 'base_link', 'front_left_wheel'],
     parameters=[
         {"use_sim_time", use_sim_time},],
     output='screen',
@@ -168,7 +150,7 @@ def generate_launch_description():
     package='tf2_ros',
     executable='static_transform_publisher',
     name="tf_base_link_2_front_right_wheel",
-    arguments=['0.08', '-0.1', '0', '0', '0', '0', 'base_link', 'front_right_wheel'],
+    arguments=['0.05', '-0.11', '0', '0', '0', '0', 'base_link', 'front_right_wheel'],
     parameters=[
         {"use_sim_time", use_sim_time},],
     output='screen',
@@ -178,7 +160,7 @@ def generate_launch_description():
     package='tf2_ros',
     executable='static_transform_publisher',
     name="tf_base_link_2_rear_left_wheel",
-    arguments=['-0.08', '0.1', '0', '0', '0', '0', 'base_link', 'rear_left_wheel'],
+    arguments=['-0.05', '0.11', '0', '0', '0', '0', 'base_link', 'rear_left_wheel'],
     parameters=[
         {"use_sim_time", use_sim_time},],
     output='screen',
@@ -188,30 +170,30 @@ def generate_launch_description():
     package='tf2_ros',
     executable='static_transform_publisher',
     name="tf_base_link_2_rear_right_wheel",
-    arguments=['-0.08', '-0.1', '0', '0', '0', '0', 'base_link', 'rear_right_wheel'],
+    arguments=['-0.05', '-0.11', '0', '0', '0', '0', 'base_link', 'rear_right_wheel'],
     parameters=[
         {"use_sim_time", use_sim_time},],
     output='screen',
   )
 
   # robot_state model (slam not working)
-  # xacro_path = pkgsPath.find("rosbot_description")+"/urdf/rosbot.xacro"
-  # info = LogInfo(msg=xacro_path)
-  # robot_state = Node(
-  #   package='robot_state_publisher',
-  #   executable='robot_state_publisher',
-  #   name='robot_state_publisher',
-  #   parameters=[{
-  #       'use_sim_time': use_sim_time,
-  #       'robot_description':Command(['xacro',' ', xacro_path])
-  #   }],
-  #   output='screen',
-  # )
+  xacro_path = pkgsPath.find("rosbot_description")+"/urdf/rosbot2.xacro"
+  info = LogInfo(msg=xacro_path)
+  robot_state = Node(
+    package='robot_state_publisher',
+    executable='robot_state_publisher',
+    name='robot_state_publisher',
+    parameters=[{
+        'use_sim_time': use_sim_time,
+        'robot_description':Command(['xacro',' ', xacro_path])
+    }],
+    output='screen',
+  )
 
   # urdf = os.path.join(
   #     pkgsPath.find('rosbot_description'),
   #     'urdf',
-  #     "turtlebot3_waffle_pi.urdf")
+  #     "rosbot2.urdf")
   # info = LogInfo(msg=urdf)
   # robot_state = Node(
   #   package='robot_state_publisher',
@@ -233,24 +215,23 @@ def generate_launch_description():
       default_value="false",
       description="if pub map_2_odom tf"
     ),
-    map_2_odom,
-    odom_2_base_link,
+    # map_2_odom,
+    # odom_2_base_link,
     base_link_2_laser,
     base_link_2_camera_link,
-    base_link_2_camera_rgb_frame,
+    camera_link_2_camera_rgb_frame,
     camera_link_2_camera_depth_frame,
-    base_link_2_dummy,
+    base_link_2_top,
     base_link_2_range_fl,
     base_link_2_range_fr,
     base_link_2_range_rl,
     base_link_2_range_rr,
-    base_link_2_top,
     base_link_2_front_left_wheel,
     base_link_2_front_right_wheel,
     base_link_2_rear_left_wheel,
     base_link_2_rear_right_wheel,
     # info,
-    # robot_state,
+    robot_state,
   ])
 
 if __name__ == '__main__':

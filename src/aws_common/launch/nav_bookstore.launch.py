@@ -8,6 +8,7 @@ from launch.actions import IncludeLaunchDescription
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
+from launch.substitutions import Command
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -30,6 +31,8 @@ def generate_launch_description():
     pkgsPath.find("aws_robomaker_bookstore_world"), 'worlds', world_file_name)
 
   # spawn robot (insert model to gazebo)
+  xacro_path = pkgsPath.find("rosbot_description")+"/urdf/rosbot2.xacro"
+  
   spawn_robot = Node(
     package='gazebo_ros',
     executable='spawn_entity.py',
@@ -39,10 +42,11 @@ def generate_launch_description():
       '-entity', 'rosbot', 
       '-x', '0', 
       '-y', '0', 
-      '-z', '0.03', 
+      '-z', '0.03',
       '-file', pkgsPath.find("rosbot_description") + '/models/rosbot.sdf'],
+      # '-topic', "robot_description"],
     parameters=[
-        {"use_sim_time", use_sim_time},],
+        {"use_sim_time": use_sim_time,},],
     output='screen',
   )
 

@@ -59,8 +59,8 @@ ros2 practice 3
   # run slam_toolbox
   $ ros2 launch aws_common slam_toolbox_sim.launch.py
 
-  # run rviz2 (TODO -> 1)
-  $ ros2 run rviz2 rviz2
+  # run rviz2
+  $ ros2 launch aws_common rosbot_rviz.launch.py use_sim_time:=true
 
   # manual control
   $ ros2 run aws_teleop teleop_keyboard
@@ -149,7 +149,7 @@ ros2 practice 3
   * [ ] gazebo -> plugin cannot use and not found mesh file
 * [x] 2. set rviz file and launch rviz
   * [x] rviz file
-  * [ ] launch
+  * [x] launch
 * [ ] 3. test `slam_toolbox` parameters
 * [ ] 4. test `nav2`
 

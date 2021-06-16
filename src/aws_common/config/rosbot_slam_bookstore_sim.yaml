@@ -32,8 +32,8 @@ slam_toolbox:
     minimum_time_interval: 0.01
     transform_timeout: 0.5
     tf_buffer_duration: 30.0
-    stack_size_to_use: 40000000 # default:40000000 #// program needs a larger stack size to serialize large maps
-    enable_interactive_mode: false
+    stack_size_to_use: 400000 # default:40000000 #// program needs a larger stack size to serialize large maps
+    enable_interactive_mode: true
 
     # General Parameters
     use_scan_matching: true
@@ -41,9 +41,9 @@ slam_toolbox:
     minimum_travel_distance: 0.1
     minimum_travel_heading: 0.57
     scan_buffer_size: 10
-    scan_buffer_maximum_scan_distance: 0.05
+    scan_buffer_maximum_scan_distance: 2.0
     link_match_minimum_response_fine: 0.1
-    link_scan_maximum_distance: 0.25
+    link_scan_maximum_distance: 1.5
     loop_search_maximum_distance: 3.0
     do_loop_closing: true
     loop_match_minimum_chain_size: 10           

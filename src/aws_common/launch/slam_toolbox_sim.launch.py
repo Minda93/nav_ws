@@ -36,7 +36,7 @@ def generate_launch_description():
     DeclareLaunchArgument(
       name="slam_params_file",
       default_value= os.path.join(pkgsPath.find("aws_common"), 
-          "config","slam_toolbox_sim.yaml"),
+          "config","rosbot_slam_bookstore_sim.yaml"),
       description="Full path to the ROS2 parameters file to use for the slam_toolbox node"
     ),
     slam_toolbox_node,

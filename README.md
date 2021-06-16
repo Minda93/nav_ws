@@ -132,6 +132,7 @@ ros2 practice 3
       * gazebo_ros_openni_kinect
       * gazebo_ros_laser
       * gazebo_ros_range
+      * gazebo_ros_control
   * solution
     * use sdf model to build xacro model (rosbot2.xacro)
       * change tf tree
@@ -140,11 +141,12 @@ ros2 practice 3
         * gazebo_ros_openni_kinect -> gazebo_ros_depth_camera
         * gazebo_ros_laser -> gazebo_ray_sensor
         * gazebo_ros_range -> gazebo_ray_sensor
+        * gazebo_ros_control -> x
 
 # TODO
 * [x] 1. fix xacro model bug
   * [x] rviz
-  * [ ] gazebo -> plugin cannot use and be not found mesh file
+  * [ ] gazebo -> plugin cannot use and not found mesh file
 * [x] 2. set rviz file and launch rviz
   * [x] rviz file
   * [ ] launch

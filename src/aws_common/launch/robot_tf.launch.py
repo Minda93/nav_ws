@@ -19,6 +19,8 @@ def generate_launch_description():
   pkgsPath = FindPackageShare([
       "aws_common", 
       "rosbot_description",])
+  xacro_path = pkgsPath.find("rosbot_description")+"/urdf/rosbot2.xacro"
+  # urdf = os.path.join(pkgsPath.find('rosbot_description'), 'urdf', "rosbot2.urdf")
   
   # map related
   map_2_odom = Node( 
@@ -177,8 +179,7 @@ def generate_launch_description():
   )
 
   # robot_state model (slam not working)
-  xacro_path = pkgsPath.find("rosbot_description")+"/urdf/rosbot2.xacro"
-  info = LogInfo(msg=xacro_path)
+  # xacro method
   robot_state = Node(
     package='robot_state_publisher',
     executable='robot_state_publisher',
@@ -189,12 +190,8 @@ def generate_launch_description():
     }],
     output='screen',
   )
-
-  # urdf = os.path.join(
-  #     pkgsPath.find('rosbot_description'),
-  #     'urdf',
-  #     "rosbot2.urdf")
-  # info = LogInfo(msg=urdf)
+  
+  # urdf method
   # robot_state = Node(
   #   package='robot_state_publisher',
   #   executable='robot_state_publisher',
@@ -226,11 +223,10 @@ def generate_launch_description():
     base_link_2_range_fr,
     base_link_2_range_rl,
     base_link_2_range_rr,
-    base_link_2_front_left_wheel,
-    base_link_2_front_right_wheel,
-    base_link_2_rear_left_wheel,
-    base_link_2_rear_right_wheel,
-    # info,
+    # base_link_2_front_left_wheel,
+    # base_link_2_front_right_wheel,
+    # base_link_2_rear_left_wheel,
+    # base_link_2_rear_right_wheel,
     robot_state,
   ])
 

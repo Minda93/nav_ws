@@ -54,7 +54,7 @@ ros2 practice 3
 # 4. Run (run only slam)
 ```bash
   # run gazebo and tf 
-  $ ros2 launch ros2 launch aws_common nav_bookstore.launch.py
+  $ ros2 launch aws_common nav_bookstore.launch.py
 
   # run slam_toolbox
   $ ros2 launch aws_common slam_toolbox_sim.launch.py

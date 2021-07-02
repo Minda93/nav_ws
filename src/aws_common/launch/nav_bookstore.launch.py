@@ -31,7 +31,7 @@ def generate_launch_description():
     pkgsPath.find("aws_robomaker_bookstore_world"), 'worlds', world_file_name)
 
   # spawn robot (insert model to gazebo)
-  xacro_path = pkgsPath.find("rosbot_description")+"/urdf/rosbot2.xacro"
+  # xacro_path = pkgsPath.find("rosbot_description")+"/urdf/rosbot2.xacro"
   
   spawn_robot = Node(
     package='gazebo_ros',
@@ -44,7 +44,7 @@ def generate_launch_description():
       '-y', '0', 
       '-z', '0.03',
       '-file', pkgsPath.find("rosbot_description") + '/models/rosbot.sdf'],
-      # '-topic', "robot_description"],
+      # '-topic', "/robot_description"],
     parameters=[
         {"use_sim_time": use_sim_time,},],
     output='screen',

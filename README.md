@@ -7,7 +7,8 @@
   - [3.1 slam_toolbox -> map](#31-slam_toolbox---map)
   - [3.2 nav2](#32-nav2)
 - [4. Run (run only slam)](#4-run-run-only-slam)
-- [5. Tools](#5-tools)
+- [5. Run (run only localization)](#5-run-run-only-localization)
+- [6. Tools](#6-tools)
 - [Bug](#bug)
   - [1. clang compiler : (-Wall -Wextra -Wpedantic)](#1-clang-compiler---wall--wextra--wpedantic)
   - [2. robot_state_publisher is incorrectly working](#2-robot_state_publisher-is-incorrectly-working)
@@ -66,7 +67,24 @@ ros2 practice 3
   $ ros2 run aws_teleop teleop_keyboard
 ```
 
-# 5. Tools
+# 5. Run (run only localization)
+```bash
+  # run gazebo and tf 
+  $ ros2 launch aws_common nav_bookstore.launch.py
+
+  # run rviz2
+  $ ros2 launch aws_common rosbot_rviz.launch.py use_sim_time:=true
+
+  # run map_server and amcl
+  $ ros2 launch aws_common localization_launch.py use_sim_time:=true
+  # manual set init_pose : pose(0, 0, 0) orientation(0, 0, 0, 1) 
+  $ ros2 topic pub /initialpose geometry_msgs/msg/PoseWithCovarianceStamped "{header: {frame_id: map}, pose: {pose: {position: {x: 0, y: 0}, orientation: {w: 1}}}}" --once
+
+  # run nav2
+  $ ros2 launch aws_common navigation_launch.py use_sim_time:=true
+```
+
+# 6. Tools
 * check tf tree to pdf file
   ```bash
     # default frames.gv and frames.pdf
@@ -147,13 +165,14 @@ ros2 practice 3
 * [x] 1. fix xacro model bug
   * [x] rviz
   * [ ] gazebo -> plugin cannot use, not found mesh file and model frame error
-* [x] 2. set rviz file and launch rviz
-  * [x] rviz file
-  * [x] launch
+* [x] ~~2. set rviz file and launch rviz~~
+  * [x] ~~rviz file~~
+  * [x] ~~launch~~
 * [ ] 3. test `slam_toolbox` parameters
 * [x] 4. test `nav2`
   * [x] amcl
   * [x] map_server
+  * [x] nav2_bt_navigator
 
 # Reference 
 * slam_toolbox

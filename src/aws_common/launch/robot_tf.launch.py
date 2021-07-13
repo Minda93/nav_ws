@@ -212,7 +212,7 @@ def generate_launch_description():
       default_value="false",
       description="if pub map_2_odom tf"
     ),
-    # map_2_odom,
+    map_2_odom,
     # odom_2_base_link,
     base_link_2_laser,
     base_link_2_camera_link,

@@ -146,12 +146,14 @@ ros2 practice 3
 # TODO
 * [x] 1. fix xacro model bug
   * [x] rviz
-  * [ ] gazebo -> plugin cannot use and not found mesh file
+  * [ ] gazebo -> plugin cannot use, not found mesh file and model frame error
 * [x] 2. set rviz file and launch rviz
   * [x] rviz file
   * [x] launch
 * [ ] 3. test `slam_toolbox` parameters
-* [ ] 4. test `nav2`
+* [x] 4. test `nav2`
+  * [x] amcl
+  * [x] map_server
 
 # Reference 
 * slam_toolbox

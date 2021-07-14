@@ -7,7 +7,7 @@
   - [3.1 slam_toolbox -> map](#31-slam_toolbox---map)
   - [3.2 nav2](#32-nav2)
 - [4. Run (run only slam)](#4-run-run-only-slam)
-- [5. Run (run only localization)](#5-run-run-only-localization)
+- [5. Run (run localization and navigation)](#5-run-run-localization-and-navigation)
 - [6. Tools](#6-tools)
 - [Bug](#bug)
   - [1. clang compiler : (-Wall -Wextra -Wpedantic)](#1-clang-compiler---wall--wextra--wpedantic)
@@ -33,7 +33,7 @@ ros2 practice 3
 | gazebo_ros_pkgs               | ros2              |
 | aws-robomaker-bookstore-world | ros2              |
 | rosbot_description            | foxy              |
-| navigation2                   | galactic (846cdb1de99f96a57723c47110371aaa6b6d50fa)          |
+| navigation2                   | galactic <br> Galactic sync 3 (3ead7d15b371729ab29091b7b1e96b25430286c4) |
 
 # 2. Setup Env
 
@@ -67,7 +67,7 @@ ros2 practice 3
   $ ros2 run aws_teleop teleop_keyboard
 ```
 
-# 5. Run (run only localization)
+# 5. Run (run localization and navigation)
 ```bash
   # run gazebo and tf 
   $ ros2 launch aws_common nav_bookstore.launch.py
@@ -77,7 +77,10 @@ ros2 practice 3
 
   # run map_server and amcl
   $ ros2 launch aws_common localization_launch.py use_sim_time:=true
-  # manual set init_pose : pose(0, 0, 0) orientation(0, 0, 0, 1) 
+  
+  # set init_pose
+  # method 1: use rviz 2D pose estimate button
+  # method 2: use command -> pose(0, 0, 0) orientation(0, 0, 0, 1) 
   $ ros2 topic pub /initialpose geometry_msgs/msg/PoseWithCovarianceStamped "{header: {frame_id: map}, pose: {pose: {position: {x: 0, y: 0}, orientation: {w: 1}}}}" --once
 
   # run nav2

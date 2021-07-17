@@ -6,9 +6,11 @@
 - [3. Flow](#3-flow)
   - [3.1 slam_toolbox -> map](#31-slam_toolbox---map)
   - [3.2 nav2](#32-nav2)
-- [4. Run (run only slam)](#4-run-run-only-slam)
-- [5. Run (run localization and navigation)](#5-run-run-localization-and-navigation)
-- [6. Tools](#6-tools)
+- [4. Demo](#4-demo)
+  - [4.1 SLAM demo](#41-slam-demo)
+  - [4.2 Localization and Navigation demo](#42-localization-and-navigation-demo)
+  - [4.3 Keepout region demo](#43-keepout-region-demo)
+- [5. Tools](#5-tools)
 - [Bug](#bug)
   - [1. clang compiler : (-Wall -Wextra -Wpedantic)](#1-clang-compiler---wall--wextra--wpedantic)
   - [2. robot_state_publisher is incorrectly working](#2-robot_state_publisher-is-incorrectly-working)
@@ -52,7 +54,8 @@ ros2 practice 3
 ## 3.1 slam_toolbox -> map
 ## 3.2 nav2
 
-# 4. Run (run only slam)
+# 4. Demo
+## 4.1 SLAM demo
 ```bash
   # run gazebo and tf 
   $ ros2 launch aws_common nav_bookstore.launch.py
@@ -67,7 +70,7 @@ ros2 practice 3
   $ ros2 run aws_teleop teleop_keyboard
 ```
 
-# 5. Run (run localization and navigation)
+## 4.2 Localization and Navigation demo
 ```bash
   # run gazebo and tf 
   $ ros2 launch aws_common nav_bookstore.launch.py
@@ -87,7 +90,31 @@ ros2 practice 3
   $ ros2 launch aws_common navigation_launch.py use_sim_time:=true
 ```
 
-# 6. Tools
+## 4.3 Keepout region demo
+```bash
+  # run gazebo and tf 
+  $ ros2 launch aws_common nav_bookstore.launch.py
+
+  # run rviz2
+  $ ros2 launch aws_common rosbot_rviz.launch.py use_sim_time:=true
+
+  # run map_server and amcl
+  $ ros2 launch aws_common localization_launch.py use_sim_time:=true params_file:=<path_of_nav2_keepout_filter_params>
+  
+  # keepout mask
+  # run filter_mask_server(another map_server) and costmap_filter_info_server
+  $ ros2 launch aws_common keepout_mask_launch.py use_sim_time:=true
+  
+  # set init_pose
+  # method 1: use rviz 2D pose estimate button
+  # method 2: use command -> pose(0, 0, 0) orientation(0, 0, 0, 1) 
+  $ ros2 topic pub /initialpose geometry_msgs/msg/PoseWithCovarianceStamped "{header: {frame_id: map}, pose: {pose: {position: {x: 0, y: 0}, orientation: {w: 1}}}}" --once
+
+  # run nav2
+  $ ros2 launch aws_common navigation_launch.py use_sim_time:=true params_file:=<path_of_nav2_keepout_filter_params>
+```
+
+# 5. Tools
 * check tf tree to pdf file
   ```bash
     # default frames.gv and frames.pdf

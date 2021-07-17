@@ -36,7 +36,7 @@ def generate_launch_description():
     DeclareLaunchArgument(
       name="rviz_file",
       default_value= os.path.join(pkgsPath.find("aws_common"), 
-          "config","rosbot.rviz"),
+          "rviz","rosbot.rviz"),
       description="Full path to the ROS2 parameters file to use for the rviz node"
     ),
     rviz2_node,

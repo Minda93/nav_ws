@@ -1,7 +1,4 @@
 import os
-
-from ament_index_python.packages import get_package_share_directory
-
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, SetEnvironmentVariable
 from launch.substitutions import LaunchConfiguration
@@ -9,27 +6,17 @@ from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from nav2_common.launch import RewrittenYaml
 
-
 def generate_launch_description():
   # Get the launch directory
   pkgsPath = FindPackageShare('aws_common')
   aws_common_dir = pkgsPath.find('aws_common')
 
   namespace = LaunchConfiguration('namespace')
-  map_yaml_file = LaunchConfiguration('map')
   use_sim_time = LaunchConfiguration('use_sim_time')
   autostart = LaunchConfiguration('autostart')
+  map_yaml_file = LaunchConfiguration('map_mask')
   params_file = LaunchConfiguration('params_file')
-  lifecycle_nodes = ['map_server', 'amcl']
-
-  # Map fully qualified names to relative ones so the node's namespace can be prepended.
-  # In case of the transforms (tf), currently, there doesn't seem to be a better alternative
-  # https://github.com/ros/geometry2/issues/32
-  # https://github.com/ros/robot_state_publisher/pull/30
-  # TODO(orduno) Substitute with `PushNodeRemapping`
-  #              https://github.com/ros2/launch_ros/issues/56
-  remappings = [('/tf', 'tf'),
-                ('/tf_static', 'tf_static')]
+  lifecycle_nodes = ['filter_mask_server', 'costmap_filter_info_server']
 
   # Create our own temporary YAML files that include substitutions
   param_substitutions = {
@@ -41,7 +28,34 @@ def generate_launch_description():
     root_key=namespace,
     param_rewrites=param_substitutions,
     convert_types=True)
+  
+  # Nodes launching commands
+  lifecycle_manager_node = Node(
+    package='nav2_lifecycle_manager',
+    executable='lifecycle_manager',
+    name='lifecycle_manager_costmap_filters',
+    namespace=namespace,
+    output='screen',
+    parameters=[{'use_sim_time': use_sim_time},
+                {'autostart': autostart},
+                {'node_names': lifecycle_nodes}])
 
+  map_server_node = Node(
+    package='nav2_map_server',
+    executable='map_server',
+    name='filter_mask_server',
+    namespace=namespace,
+    output='screen',
+    parameters=[configured_params])
+
+  costmap_filter_info_server_node = Node(
+    package='nav2_map_server',
+    executable='costmap_filter_info_server',
+    name='costmap_filter_info_server',
+    namespace=namespace,
+    output='screen',
+    parameters=[configured_params])
+  
   return LaunchDescription([
     # Set env var to print messages to stdout immediately
     SetEnvironmentVariable('RCUTILS_LOGGING_BUFFERED_STREAM', '1'),
@@ -49,47 +63,26 @@ def generate_launch_description():
     DeclareLaunchArgument(
       'namespace', default_value='',
       description='Top-level namespace'),
-
-    DeclareLaunchArgument(
-      'map',
-      default_value=os.path.join(aws_common_dir, 'map', 'nav_bookstore_map.yaml'),
-      description='Full path to map yaml file to load'),
-
+    
     DeclareLaunchArgument(
       'use_sim_time', default_value='false',
       description='Use simulation (Gazebo) clock if true'),
-
+    
     DeclareLaunchArgument(
       'autostart', default_value='true',
       description='Automatically startup the nav2 stack'),
-
+    
+    DeclareLaunchArgument(
+      'map_mask',
+      default_value=os.path.join(aws_common_dir, 'map', 'bookstore_keepout_mask.yaml'),
+      description='Full path to map yaml file to load'),
+    
     DeclareLaunchArgument(
       'params_file',
-      default_value=os.path.join(aws_common_dir, 'config', 'nav2_params.yaml'),
+      default_value=os.path.join(aws_common_dir, 'config', 'keepout_params.yaml'),
       description='Full path to the ROS2 parameters file to use'),
-
-    Node(
-      package='nav2_map_server',
-      executable='map_server',
-      name='map_server',
-      output='screen',
-      parameters=[configured_params],
-      remappings=remappings),
-
-    Node(
-      package='nav2_amcl',
-      executable='amcl',
-      name='amcl',
-      output='screen',
-      parameters=[configured_params],
-      remappings=remappings),
-
-    Node(
-      package='nav2_lifecycle_manager',
-      executable='lifecycle_manager',
-      name='lifecycle_manager_localization',
-      output='screen',
-      parameters=[{'use_sim_time': use_sim_time},
-                  {'autostart': autostart},
-                  {'node_names': lifecycle_nodes}]),
+    
+    lifecycle_manager_node,
+    map_server_node,
+    costmap_filter_info_server_node,
   ])

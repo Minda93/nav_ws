@@ -17,8 +17,10 @@ core
 aws-robomaker-bookstore-world
 rosbot_description
 
+# packages
 navigation2
 ros
 ompl
 slam_toolbox
 BehaviorTree
+Groot

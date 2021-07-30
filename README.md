@@ -13,8 +13,9 @@
 - [5. Tools](#5-tools)
 - [Bug](#bug)
   - [1. clang compiler : (-Wall -Wextra -Wpedantic)](#1-clang-compiler---wall--wextra--wpedantic)
-  - [2. robot_state_publisher is incorrectly working](#2-robot_state_publisher-is-incorrectly-working)
-  - [3. Some plugins of gazebo_ros_pkgs is not support for ros2](#3-some-plugins-of-gazebo_ros_pkgs-is-not-support-for-ros2)
+  - [2. rosdep install error](#2-rosdep-install-error)
+  - [3. robot_state_publisher is incorrectly working](#3-robot_state_publisher-is-incorrectly-working)
+  - [4. Some plugins of gazebo_ros_pkgs is not support for ros2](#4-some-plugins-of-gazebo_ros_pkgs-is-not-support-for-ros2)
 - [TODO](#todo)
 - [Reference](#reference)
 
@@ -160,8 +161,15 @@ ros2 practice 3
       # use navigation2 for main branch
       # have to update ros/geometry2 to ros2 version
     ```
+
+## 2. rosdep install error
+* aws_common: Cannot locate rosdep definition for [rviz]
+  * reason
+    * maybe source environment is not complete.
+  * solution
+    * Temporarily use COLCON_IGNORE file ignore aws_common packages
     
-## 2. robot_state_publisher is incorrectly working
+## 3. robot_state_publisher is incorrectly working
 * output `/tf` is not correct.
   * robot model and tf is not stable.
   * reason
@@ -172,7 +180,7 @@ ros2 practice 3
       * But, there is not robot model in rviz.
     * ~~custom odom transform~~
 
-## 3. Some plugins of gazebo_ros_pkgs is not support for ros2
+## 4. Some plugins of gazebo_ros_pkgs is not support for ros2
 * xacro model is too old version to use.
   * reason
     * plugins too old

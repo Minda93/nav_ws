@@ -81,6 +81,8 @@
 
       # solution
       # source gazebo env
+      $ . /usr/share/gazebo/setup.sh
+      # $ . /usr/share/gazebo-11/setup.sh
     ```
   * 3. aws_robomaker_retail_Spotlight_01 model mesh not found
     ```bash 

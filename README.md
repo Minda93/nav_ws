@@ -32,8 +32,8 @@ ros2 practice 3
 | clang                         | 10.0.0-4ubuntu1   |
 | CMake                         | 3.18.4            |
 | ros2                          | galactic          |
-| gazebo                        | 11.5.1            |
-| gazebo_ros_pkgs               | ros2              |
+| gazebo                        | 11.9.1            |
+| gazebo_ros_pkgs               | galactic <br> (205755685f77300a27d16c9739b1e397e30811d9)         |
 | aws-robomaker-bookstore-world | ros2              |
 | rosbot_description            | foxy              |
 | navigation2                   | galactic <br> Galactic sync 3 (3ead7d15b371729ab29091b7b1e96b25430286c4) |

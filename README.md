@@ -26,17 +26,19 @@ ros2 practice 3
 
 # 1. Environment
 
-| names                         | version           |
-| ---                           | ---               |
-| gcc                           | 9.3.0             |
-| clang                         | 10.0.0-4ubuntu1   |
-| CMake                         | 3.18.4            |
-| ros2                          | galactic          |
-| gazebo                        | 11.9.1            |
+| names                         | version             |
+| ---                           | ---                 |
+| gcc                           | 9.3.0               |
+| ~~clang~~                     | ~~10.0.0-4ubuntu1~~ |
+| CMake                         | 3.18.4              |
+| ros2                          | galactic (release20210716)        |
+| gazebo                        | 11.9.1              |
 | gazebo_ros_pkgs               | galactic <br> (205755685f77300a27d16c9739b1e397e30811d9)         |
-| aws-robomaker-bookstore-world | ros2              |
-| rosbot_description            | foxy              |
-| navigation2                   | galactic <br> Galactic sync 3 (3ead7d15b371729ab29091b7b1e96b25430286c4) |
+| aws-robomaker-bookstore-world | ros2                |
+| rosbot_description            | foxy                |
+| navigation2                   | galactic <br> Galactic sync 5 (4a6878c2f8fb95e5bc3be8e6f0b531d17d9bebb2) |
+|  BehaviorTree.CPP             | master <br>(0bff68a051a05e0b60a6908750d91ce6079c8685) |
+| Groot | master <br> (05fe640172e3cd447ab5db31f71355789f6a48b3) |
 
 # 2. Setup Env
 

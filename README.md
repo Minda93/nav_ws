@@ -6,7 +6,7 @@
 - [3. Flow](#3-flow)
   - [3.1 slam_toolbox -> map](#31-slam_toolbox---map)
   - [3.2 nav2](#32-nav2)
-- [4. Demo](#4-demo)
+- [4. Base Demo](#4-base-demo)
   - [4.1 SLAM demo](#41-slam-demo)
   - [4.2 Localization and Navigation demo](#42-localization-and-navigation-demo)
   - [4.3 Keepout region demo](#43-keepout-region-demo)
@@ -57,7 +57,7 @@ ros2 practice 3
 ## 3.1 slam_toolbox -> map
 ## 3.2 nav2
 
-# 4. Demo
+# 4. Base Demo
 ## 4.1 SLAM demo
 ```bash
   # run gazebo and tf 
@@ -74,6 +74,9 @@ ros2 practice 3
 ```
 
 ## 4.2 Localization and Navigation demo
+* behavior tree
+  * navigate_to_pose_w_replanning_and_recovery.xml
+  
 ```bash
   # run gazebo and tf 
   $ ros2 launch aws_common nav_bookstore.launch.py
@@ -91,6 +94,12 @@ ros2 practice 3
 
   # run nav2
   $ ros2 launch aws_common navigation_launch.py use_sim_time:=true
+
+  # check behavior tree
+  ## 1. click monitor -> click start
+  ## 2. default localhost and port 
+  ## 3. click connect 
+  $ ros2 run groot Groot
 ```
 
 ## 4.3 Keepout region demo
@@ -131,6 +140,10 @@ ros2 practice 3
     # robot name
     # ---------- Successfully Parsed XML ---------------
     # robot link
+  ```
+* check or edit behavior tree
+  ```bash
+    $ ros2 run groot Groot
   ```
     
 # Bug 
@@ -213,6 +226,9 @@ ros2 practice 3
   * [x] amcl
   * [x] map_server
   * [x] nav2_bt_navigator
+* [x] 5. Add Application
+  * [ ] Inspection task
+  * [ ] Dynamic Object Following
 
 # Reference 
 * slam_toolbox
@@ -231,5 +247,8 @@ ros2 practice 3
   * [ROS2:簡単な箱の表示 rviz ](https://memodays.jp/400/)
   * [Using URDF with robot_state_publisher](https://docs.ros.org/en/galactic/Tutorials/URDF/Using-URDF-with-Robot-State-Publisher.html)
   * [robot_state_publisher + xacro + Python launch](https://answers.ros.org/question/361623/ros2-robot_state_publisher-xacro-python-launch/)
+* behavior tree
+  * [BehaviorTree.CPP](https://github.com/BehaviorTree/BehaviorTree.CPP)
+  * [Groot](https://github.com/BehaviorTree/Groot)
 * issue
   * [gazebo_ros_pkgs #512](https://github.com/ros-simulation/gazebo_ros_pkgs/issues/512)

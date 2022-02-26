@@ -4,6 +4,8 @@
 - [AWS GAZEBO](#aws-gazebo)
 - [1. Environment](#1-environment)
 - [2. Setup Env](#2-setup-env)
+  - [2.1 download rosbot and bookstore](#21-download-rosbot-and-bookstore)
+  - [2.2 download person models](#22-download-person-models)
 - [3. Test Model on gazebo](#3-test-model-on-gazebo)
 - [Bug](#bug)
 - [Reference](#reference)
@@ -18,8 +20,10 @@
 | ---                           | ---               |
 | aws-robomaker-bookstore-world | ros2              |
 | rosbot_description            | foxy              |
+| person_sim                    | master            |
 
 # 2. Setup Env
+## 2.1 download rosbot and bookstore 
   ```bash
     $ cd <ws>/src/aws_gazebo
 
@@ -40,6 +44,16 @@
     # copy rosbot2 model
     $ cd <ws>/src/aws_gazebo/rosbot_urdf
     $ cp * <ws>/src/aws_gazebo/rosbot_description/urdf
+  ```
+
+## 2.2 download person models
+  ```bash
+    $ cd <ws>/src/aws_gazebo/person_models
+    $ ./download_person_models.sh
+
+    $ cd <ws>
+
+    $ colcon build --symlink-install --packages-select person_models
   ```
 
 # 3. Test Model on gazebo
@@ -99,3 +113,4 @@
 # Reference
 * [aws-robomaker-bookstore-world](https://github.com/aws-robotics/aws-robomaker-bookstore-world)
 * [rosbot_description](https://github.com/husarion/rosbot_description)
+* [person_sim](https://bitbucket.org/theconstructcore/person_sim/src/master/)

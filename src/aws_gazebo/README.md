@@ -31,7 +31,6 @@
     $ git clone -b ros2 https://github.com/aws-robotics/aws-robomaker-bookstore-world.git
     $ git clone -b foxy https://github.com/husarion/rosbot_description.git
 
-    
     $ cd <ws>
 
     # download dependencies
@@ -42,10 +41,15 @@
     $ colcon build --symlink-install --packages-select aws-robomaker-bookstore-world rosbot_description
 
     # copy rosbot2 model
-    $ cd <ws>/src/aws_gazebo/rosbot_urdf
-    $ cp * <ws>/src/aws_gazebo/rosbot_description/urdf
-  ```
+    # $ cd <ws>/src/aws_gazebo/rosbot_urdf
+    # $ cp * <ws>/src/aws_gazebo/rosbot_description/urdf
 
+    # copy modify rosbot model(sdf)
+    # change camera plugin parameter
+    $ cd <ws>/src/aws_gazebo/rosbot_urdf
+    $ cp rosbot.sdf <ws>/src/aws_gazebo/rosbot_description/models
+  ```
+  
 ## 2.2 download person models
   ```bash
     $ cd <ws>/src/aws_gazebo/person_models
@@ -111,6 +115,9 @@
     ```
 
 # Reference
+* ROSbot
+  * [ROSbot 2.0 & ROSbot 2.0 PRO](https://husarion.com/manuals/rosbot/)
+  * [Orbbec Astra Pro / Astra / Astra S - unipos](https://www.unipos.net/find/product_item.php?id=3159)
 * [aws-robomaker-bookstore-world](https://github.com/aws-robotics/aws-robomaker-bookstore-world)
 * [rosbot_description](https://github.com/husarion/rosbot_description)
 * [person_sim](https://bitbucket.org/theconstructcore/person_sim/src/master/)

@@ -68,9 +68,13 @@ ros2 practice 3
 
   # run rviz2
   $ ros2 launch aws_common rosbot_rviz.launch.py use_sim_time:=true
-
-  # manual control
+  
+  # method manual or nav2 
+  ## 1. manual control
   $ ros2 run aws_teleop teleop_keyboard
+
+  ## 2. nav2
+  $ ros2 launch aws_common navigation_launch.py use_sim_time:=true
 ```
 
 ## 4.2 Localization and Navigation demo
@@ -231,6 +235,9 @@ ros2 practice 3
   * [ ] Dynamic Object Following
 
 # Reference 
+* ROSbot
+  * [ROSbot 2.0 & ROSbot 2.0 PRO](https://husarion.com/manuals/rosbot/)
+  * [Orbbec Astra Pro / Astra / Astra S - unipos](https://www.unipos.net/find/product_item.php?id=3159)
 * slam_toolbox
   * [slam_toolbox github](https://github.com/SteveMacenski/slam_toolbox)
   * [ROS2 Navigation2 \~slam-toolboxでSLAMする\~](https://qiita.com/porizou1/items/152ad3829e84a9ba0355)

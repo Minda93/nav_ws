@@ -16,6 +16,7 @@ core
 
 aws-robomaker-bookstore-world
 rosbot_description
+src/aws_gazebo/person_models/models
 
 # packages
 navigation2
